@@ -9,10 +9,6 @@
     <meta-data android:name="googleProjectNo" android:value="\ {$googleProjectNo}"/>
   </xsl:template>
 
-  <xsl:template match="meta-data[@android:name='googleProjectNo']">
-    <meta-data android:name="googleProjectNo" android:value="\ {$googleProjectNo}"/>
-  </xsl:template>
-
   <xsl:template match="meta-data[@android:name='onesignalAppID']">
     <meta-data android:name="onesignalAppID" android:value="{$onesignalAppID}"/>
   </xsl:template>
