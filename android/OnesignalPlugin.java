@@ -19,7 +19,6 @@ import android.content.pm.ApplicationInfo;
 
 import com.onesignal.OneSignal;
 import com.onesignal.OneSignal.*;
-import com.onesignal.GameBroadcastReceiver;
 import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
@@ -27,16 +26,10 @@ import com.onesignal.OSNotificationOpenResult;
 public class OnesignalPlugin implements IPlugin {
 
   private static final String TAG = "{{OnesignalPlugin}}";
-
   private static boolean onesignal = false;
-
   private static JSONObject onesignal_data  = new JSONObject();
-
   private static JSONObject data_to_send = new JSONObject();
-
   private static Integer opened_count = 0;
-
-  private static GameBroadcastReceiver gameBroadcastReceiver = new GameBroadcastReceiver();
 
   public class onesignalNotificationReceived extends com.tealeaf.event.Event {
     boolean failed;
@@ -75,7 +68,7 @@ public class OnesignalPlugin implements IPlugin {
         }
 
         if (appID != null && g_Project_Number != null) {
-          OneSignal.init(activity, g_Project_Number, appID, new gameNotificationOpenedHandler());
+          OneSignal.init(activity, g_Project_Number, appID, new OpenedHandler(), new ReceivedHandler());
           onesignal = true;
           logger.log(TAG, "Onesignal instance created");
         }
@@ -95,7 +88,7 @@ public class OnesignalPlugin implements IPlugin {
 
   @Override
   public void onResume() {
-    checkNotification();
+    //checkNotification();
   }
 
   public void onRenderResume() {
@@ -110,6 +103,7 @@ public class OnesignalPlugin implements IPlugin {
     }
   }
 
+  /*
   public void checkNotification() {
     Date notificationReceived = null;
     long time_stamp = -1;
@@ -159,6 +153,7 @@ public class OnesignalPlugin implements IPlugin {
       onesignal_data = new JSONObject();
     }
   }
+  */
 
   //Send tags to onesignal
   public void sendTags(JSONObject jsonData) {
@@ -264,29 +259,28 @@ public class OnesignalPlugin implements IPlugin {
   }
 
   // NotificationOpenedHandler is implemented in its own class instead of adding implements to MainActivity so we don't hold on to a reference of our first activity if it gets recreated.
-  public class gameNotificationOpenedHandler implements NotificationOpenedHandler {
+  public class OpenedHandler implements NotificationOpenedHandler {
     /**
      * Callback to implement in your app to handle when a notification is opened from the Android status bar
      */
     @Override
     public void notificationOpened (OSNotificationOpenResult openedResult) {
+      logger.log(TAG, "Notification opened");
       OSNotification notification = openedResult.notification;
       String title = notification.payload.title;
       String message = notification.payload.body;
       String segment_name = null;
-      String action_id = null;
       JSONObject additionalData = notification.payload.additionalData;
-      OSNotificationAction.ActionType actionType = openedResult.action.actionType;
-
-      if (actionType == OSNotificationAction.ActionType.ActionTaken)
-        action_id = openedResult.action.actionID;
-        logger.log(TAG, "Button pressed with id: " + action_id);
 
       if (additionalData != null) {
         segment_name = additionalData.optString("segment_name", null);
         logger.log(TAG, "Full additionalData:\n" + additionalData.toString());
       }
+      EventQueue.pushEvent(new onesignalNotificationOpened(
+                           onesignal_data.toString()));
+      //TODO: Actions(When button is clicked)
 
+      /*
       Date current_time = new Date();
       long opened_on_time = current_time.getTime();
       boolean is_active = notification.isAppInFocus;
@@ -308,6 +302,22 @@ public class OnesignalPlugin implements IPlugin {
         e.printStackTrace();
       }
       getNotificationOpenedCount();
+      */
+    }
+  }
+
+  public class ReceivedHandler implements NotificationReceivedHandler {
+    @Override
+    public void notificationReceived(OSNotification notification) {
+      logger.log(TAG, "Notification received");
+      JSONObject data = notification.payload.additionalData;
+      String customKey;
+
+      if (data != null) {
+        customKey = data.optString("customkey", null);
+        if (customKey != null)
+          logger.log(TAG, "customkey set with value: " + customKey);
+       }
     }
   }
 }
