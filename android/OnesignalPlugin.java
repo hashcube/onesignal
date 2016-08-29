@@ -27,8 +27,6 @@ public class OnesignalPlugin implements IPlugin {
 
   private static final String TAG = "{{OnesignalPlugin}}";
   private static boolean onesignal = false;
-  private static JSONObject data_to_send = new JSONObject();
-  private static Integer opened_count = 0;
 
   public class onesignalNotificationReceived extends com.tealeaf.event.Event {
     boolean failed;
@@ -58,7 +56,7 @@ public class OnesignalPlugin implements IPlugin {
     PackageManager manager = activity.getPackageManager();
 
     try {
-      if (onesignal == false){
+      if (onesignal == false) {
         Bundle meta = manager.getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA).metaData;
 
         if (meta != null) {
@@ -87,7 +85,6 @@ public class OnesignalPlugin implements IPlugin {
 
   @Override
   public void onResume() {
-    //checkNotification();
   }
 
   public void onRenderResume() {
@@ -101,58 +98,6 @@ public class OnesignalPlugin implements IPlugin {
       e.printStackTrace();
     }
   }
-
-  /*
-  public void checkNotification() {
-    Date notificationReceived = null;
-    long time_stamp = -1;
-    Integer notificationReceivedCount = 0;
-    String received_data = null;
-
-    notificationReceived = gameBroadcastReceiver.getReceiveDate();
-
-    if(notificationReceived != null ||
-       onesignal_data.has("last_notification_opened_on"))
-    {
-      if(notificationReceived != null)
-      {
-        time_stamp = notificationReceived.getTime();
-        notificationReceivedCount = gameBroadcastReceiver.getReceiveCount();
-        try {
-          onesignal_data.put("last_notification_received_on", time_stamp);
-          data_to_send.put("last_notification_received_on",
-                                      notificationReceived.toString());
-          onesignal_data.put("notification_received_count",
-                              notificationReceivedCount);
-
-          if(!onesignal_data.has("notification_segment_name")) {
-            received_data = gameBroadcastReceiver.getReceiveData("segment_name");
-            onesignal_data.put("notification_segment_name", received_data);
-          }
-
-          if(!onesignal_data.has("notification_title")) {
-            received_data = gameBroadcastReceiver.getReceiveData("title");
-            onesignal_data.put("notification_title", received_data);
-          }
-
-          if(!onesignal_data.has("notification_message")) {
-            received_data = gameBroadcastReceiver.getReceiveData("message");
-            onesignal_data.put("notification_message", received_data);
-          }
-
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-        getNotificationReceivedCount(notificationReceivedCount);
-      }
-      sendTags(data_to_send);
-      EventQueue.pushEvent(new onesignalNotificationReceived(
-                           onesignal_data.toString()));
-      data_to_send = new JSONObject();
-      onesignal_data = new JSONObject();
-    }
-  }
-  */
 
   //Send tags to onesignal
   public void sendTags(JSONObject jsonData) {
@@ -197,38 +142,6 @@ public class OnesignalPlugin implements IPlugin {
     }
   }
 
-  //Get notification_opened_count, Other tags can be gotten in the same way
-  public void getNotificationOpenedCount() {
-    try {
-      OneSignal.getTags(new GetTagsHandler() {
-        @Override
-        public void tagsAvailable(JSONObject rTags) {
-          logger.log(TAG, "retrieved data for open : ");
-          Integer tag_val = 0 ;
-          JSONObject object = new JSONObject();
-          try {
-            tag_val = rTags.getInt("notification_opened_count");
-          } catch (JSONException eJ){
-            logger.log(TAG, "Opening notification for the first time");
-          } catch (Exception e) {
-             e.printStackTrace();
-          }
-
-          try {
-            tag_val += opened_count;
-            object.put("notification_opened_count", tag_val.toString());
-            opened_count = 0;
-            sendTags(object);
-          } catch (JSONException eJ){
-            logger.log(TAG, "Error in json");
-          }
-        }
-      });
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
   public void onStart() {
   }
 
@@ -257,7 +170,6 @@ public class OnesignalPlugin implements IPlugin {
   public void onBackPressed() {
   }
 
-  // NotificationOpenedHandler is implemented in its own class instead of adding implements to MainActivity so we don't hold on to a reference of our first activity if it gets recreated.
   public class OpenedHandler implements NotificationOpenedHandler {
     @Override
     public void notificationOpened (OSNotificationOpenResult openedResult) {
