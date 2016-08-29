@@ -20,14 +20,13 @@ import android.content.pm.ApplicationInfo;
 import com.onesignal.OneSignal;
 import com.onesignal.OneSignal.*;
 import com.onesignal.OSNotification;
-import com.onesignal.OSNotificationAction;
+import com.onesignal.OSNotificationPayload;
 import com.onesignal.OSNotificationOpenResult;
 
 public class OnesignalPlugin implements IPlugin {
 
   private static final String TAG = "{{OnesignalPlugin}}";
   private static boolean onesignal = false;
-  private static JSONObject onesignal_data  = new JSONObject();
   private static JSONObject data_to_send = new JSONObject();
   private static Integer opened_count = 0;
 
@@ -260,49 +259,13 @@ public class OnesignalPlugin implements IPlugin {
 
   // NotificationOpenedHandler is implemented in its own class instead of adding implements to MainActivity so we don't hold on to a reference of our first activity if it gets recreated.
   public class OpenedHandler implements NotificationOpenedHandler {
-    /**
-     * Callback to implement in your app to handle when a notification is opened from the Android status bar
-     */
     @Override
     public void notificationOpened (OSNotificationOpenResult openedResult) {
       logger.log(TAG, "Notification opened");
       OSNotification notification = openedResult.notification;
-      String title = notification.payload.title;
-      String message = notification.payload.body;
-      String segment_name = null;
-      JSONObject additionalData = notification.payload.additionalData;
-
-      if (additionalData != null) {
-        segment_name = additionalData.optString("segment_name", null);
-        logger.log(TAG, "Full additionalData:\n" + additionalData.toString());
-      }
-      EventQueue.pushEvent(new onesignalNotificationOpened(
-                           onesignal_data.toString()));
+      JSONObject os_data = NotificationData.get(openedResult.notification);
+      EventQueue.pushEvent(new onesignalNotificationOpened(os_data.toString()));
       //TODO: Actions(When button is clicked)
-
-      /*
-      Date current_time = new Date();
-      long opened_on_time = current_time.getTime();
-      boolean is_active = notification.isAppInFocus;
-      opened_count += 1;
-
-      try {
-        onesignal_data.put("notification_segment_name", segment_name);
-        onesignal_data.put("notification_title", title);
-        onesignal_data.put("notification_message", message);
-        onesignal_data.put("last_notification_opened_on", opened_on_time);
-        onesignal_data.put("notification_opened_count", opened_count);
-        onesignal_data.put("is_active", is_active);
-        onesignal_data.put("action_id", action_id);
-
-        EventQueue.pushEvent(new onesignalNotificationOpened(
-                           onesignal_data.toString()));
-        data_to_send.put("last_notification_opened_on", current_time.toString());
-      } catch (JSONException e) {
-        e.printStackTrace();
-      }
-      getNotificationOpenedCount();
-      */
     }
   }
 
@@ -310,14 +273,32 @@ public class OnesignalPlugin implements IPlugin {
     @Override
     public void notificationReceived(OSNotification notification) {
       logger.log(TAG, "Notification received");
-      JSONObject data = notification.payload.additionalData;
-      String customKey;
+      JSONObject os_data = NotificationData.get(notification);
+      EventQueue.pushEvent(new onesignalNotificationReceived(os_data.toString()));
+    }
+  }
 
-      if (data != null) {
-        customKey = data.optString("customkey", null);
-        if (customKey != null)
-          logger.log(TAG, "customkey set with value: " + customKey);
-       }
+  public static class NotificationData {
+    public static JSONObject get(OSNotification notification) {
+      JSONObject os_data = new JSONObject();
+      OSNotificationPayload payload = notification.payload;
+      JSONObject additional_data;
+
+      try {
+        os_data.put("notification_id", payload.notificationId);
+        os_data.put("title", payload.title);
+        os_data.put("body", payload.body);
+        additional_data = payload.additionalData;
+        if (additional_data != null) {
+          os_data.put("additional_data", additional_data.toString());
+        }
+        os_data.put("launch_url", payload.launchUrl);
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+      //TODO: More properties can be sent to the client
+
+      return os_data;
     }
   }
 }
