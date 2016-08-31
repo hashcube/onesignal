@@ -1,16 +1,40 @@
 <!--START_PLUGINS_MANIFEST-->
 <!-- Onesignal -->
+<permission android:name="c2d_message"
+            android:protectionLevel="signature" />
+<uses-permission android:name="packageNamePermissionC2D" />
 <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.VIBRATE" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-<permission android:name="c2d_message"/>
-<uses-permission android:name="packageNamePermissionC2D"/>
-<permission android:name="adm_message"/>
-<uses-permission android:name="packageNamePermissionRECEIVE" />
-<uses-permission android:name="com.amazon.device.messaging.permission.RECEIVE" />
+<!-- START: ShortcutBadger -->
+<!-- Samsung -->
+<uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+<uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
+
+<!-- HTC -->
+<uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+<uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
+
+<!-- Sony -->
+<uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+<uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
+
+<!-- Apex -->
+<uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+
+<!-- Solid -->
+<uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
+
+<!-- Huawei -->
+<uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+<uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+<uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" />
+<!-- End: ShortcutBadger -->
+-<uses-permission android:name="packageNamePermissionRECEIVE" />
 <!--END_PLUGINS_MANIFEST-->
 <!--START_PLUGINS_APPLICATION-->
 <!-- Onesignal -->
@@ -32,31 +56,28 @@
   </intent-filter>
 </receiver>
 
-<activity android:name="com.onesignal.NotificationOpenedActivity"/>
-<receiver
-    android:name="com.onesignal.GcmBroadcastReceiver"
-    android:permission="com.google.android.c2dm.permission.SEND" >
-  <intent-filter>
-    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-    <category android:name="packageName" />
-  </intent-filter>
-</receiver>
-<service android:name="com.onesignal.GcmIntentService" />
-
-<receiver
-    android:name="com.onesignal.GameBroadcastReceiver"
-    android:permission="com.amazon.device.messaging.permission.SEND">
-  <intent-filter>
-    <action android:name="com.amazon.device.messaging.intent.RECEIVE" />
-    <category android:name="packageName" />
-  </intent-filter>
-</receiver>
-
-<receiver
-    android:name="com.onesignal.GameBroadcastReceiver">
-  <intent-filter>
-    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-    <category android:name="packageName" />
-  </intent-filter>
-</receiver>
+<receiver android:name="com.onesignal.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+    <intent-filter>
+      <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+      <category android:name="packageName" />
+    </intent-filter>
+  </receiver>
+  <receiver android:name="com.onesignal.NotificationOpenedReceiver" />
+  <service android:name="com.onesignal.GcmIntentService" />
+  <service android:name="com.onesignal.SyncService" android:stopWithTask="false" />
+  <activity android:name="com.onesignal.PermissionsActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+ 
+  <service android:name="com.onesignal.NotificationRestoreService" />
+  <receiver android:name="com.onesignal.BootUpReceiver">
+    <intent-filter>
+      <action android:name="android.intent.action.BOOT_COMPLETED" />
+      <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+    </intent-filter>
+  </receiver>
+  <receiver android:name="com.onesignal.UpgradeReceiver" >
+    <intent-filter>
+      <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+    </intent-filter>
+  </receiver>
 <!--END_PLUGINS_APPLICATION-->

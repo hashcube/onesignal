@@ -1,7 +1,6 @@
 {
   "copyFiles": [
-   "OnesignalPlugin.java",
-   "GameBroadcastReceiver.java"
+   "OnesignalPlugin.java"
   ],
   "libraries": [
   ],
