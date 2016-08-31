@@ -66,6 +66,7 @@ public class OnesignalPlugin implements IPlugin {
 
         if (appID != null && g_Project_Number != null) {
           OneSignal.init(activity, g_Project_Number, appID, new OpenedHandler(), new ReceivedHandler());
+          OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
           onesignal = true;
           logger.log(TAG, "Onesignal instance created");
         }
