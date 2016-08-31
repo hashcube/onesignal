@@ -199,7 +199,7 @@ public class OnesignalPlugin implements IPlugin {
 
       try {
         os_data.put("notification_id", payload.notificationId);
-        os_data.put("is_foreground", payload.isAppInFocus);
+        os_data.put("is_foreground", notification.isAppInFocus);
         os_data.put("title", payload.title);
         os_data.put("body", payload.body);
         additional_data = payload.additionalData;
