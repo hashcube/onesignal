@@ -11,23 +11,18 @@ function pluginOn(evt, next) {
 
 exports = new (Class(function() {
 
-  var cb = [],
-    flag = 0,
+  var cb = null,
     data = {},
-    invokeCallbacks = function (list) {
-      // Pop off the first argument and keep the rest
-      var args = Array.prototype.splice.call(arguments, 1),
-        len = list.length,
-        i, next;
+    invokeCallback = function () {
+      var args = arguments;
 
-      // For each callback,
-      for (i = 0; i < len; ++i) {
-        next = list[i];
-        // If callback was actually specified,
-        if (next) {
-          // Run it
-          next.apply(null, args);
-        }
+      // If callback available,
+      if (cb) {
+        // Run it
+        cb.apply(null, args);
+      } else {
+        // Store it
+        data[args[0]] = args[1];
       }
     };
 
@@ -37,7 +32,7 @@ exports = new (Class(function() {
     if (!v.failed) {
       received_data = JSON.parse(v.notification_data);
       logger.log("{onesignal} data at js", JSON.stringify(v));
-      invokeCallbacks(cb, received_data, "NotificationReceived");
+      invokeCallback("NotificationReceived", received_data);
     }
   });
 
@@ -45,8 +40,8 @@ exports = new (Class(function() {
     var received_data;
 
     received_data = JSON.parse(v.notification_data);
-    logger.log("{onesignal} data at js", JSON.stringify(v));
-    invokeCallbacks(cb, received_data, "NotificationOpened");
+    logger.log("{onesignal} onOpened data at js", JSON.stringify(v));
+    invokeCallback("NotificationOpened", received_data);
   });
 
   // SendTags
@@ -54,9 +49,14 @@ exports = new (Class(function() {
     pluginSend('sendUserTags', obj);
   };
 
-  this.registerCallback = function (next) {
-    if(cb.length < 1) {
-      cb.push(next);
+  this.registerCallback = function (callback) {
+
+    cb = callback;
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        invokeCallback(key, data[key]);
+        delete data[key];
+      }
     }
   };
 

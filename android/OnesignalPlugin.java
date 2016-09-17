@@ -116,7 +116,7 @@ public class OnesignalPlugin implements IPlugin {
       OneSignal.getTags(new GetTagsHandler() {
         @Override
         public void tagsAvailable(JSONObject rTags) {
-          Integer  tag_val = 0;
+          Integer tag_val = 0;
           JSONObject object = new JSONObject();
 
           logger.log(TAG, "retrieved data for receive : ");
