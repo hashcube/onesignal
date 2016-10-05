@@ -53,24 +53,21 @@
 
 - (void) sendNotificationResponse: (OSNotificationPayload *)payload launchData:(NSDictionary *) data {
   NSMutableDictionary *notification_data;
-  NSString * where;
   NSString *jsonString;
   NSString *subtitle;
   NSString *launchURL;
   NSDictionary *additionalData;
 
   if (payload) {
-    where = @"payload not nil";
-      subtitle = payload.subtitle;
-      launchURL = payload.launchURL;
-      additionalData = payload.additionalData;
+    subtitle = payload.subtitle;
+    launchURL = payload.launchURL;
+    additionalData = payload.additionalData;
     notification_data = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                          payload.notificationID, @"notification_id",
                          payload.title, @"title",
                          payload.body, @"body",
                          nil];
   } else {
-    where = @"launchData not nil";
     NSDictionary *alert = data[@"aps"][@"alert"];
     NSDictionary *custom = data[@"custom"];
 
