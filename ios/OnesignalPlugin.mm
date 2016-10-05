@@ -85,10 +85,10 @@
   }
 
   if(subtitle) {
-      [notification_data setValue:subtitle forKey: @"subtitle"];
+    [notification_data setValue:subtitle forKey: @"subtitle"];
   }
   if(launchURL) {
-      [notification_data setValue:launchURL forKey: @"launch_url"];
+    [notification_data setValue:launchURL forKey: @"launch_url"];
   }
   if(additionalData) {
     jsonString = [self getJSONStringFromDict:additionalData];
