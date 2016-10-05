@@ -19,8 +19,9 @@
 
 - (void) initializeWithManifest:(NSDictionary *)manifest appDelegate:(TeaLeafAppDelegate *)appDelegate {
   @try {
-    //ONLY DURING DEBUG
-    //[OneSignal setLogLevel: ONE_S_LL_VERBOSE visualLevel: ONE_S_LL_DEBUG];
+    // TODO: Make it enabed based on a flag
+    // ONLY DURING DEBUG
+    // [OneSignal setLogLevel: ONE_S_LL_VERBOSE visualLevel: ONE_S_LL_DEBUG];
 
     NSDictionary *ios = [manifest valueForKey:@"ios"];
     NSString *onesignalAppId = [ios valueForKey:@"onesignalAppID"];
@@ -35,12 +36,13 @@
                appId:onesignalAppId
                handleNotificationReceived:^(OSNotification *notification) {
                  NSLog(@"Received Notification - %@", notification.payload.notificationID);
-                 //TODO: Handle notification received
+                 // TODO: Handle notification received
                }
                handleNotificationAction:^(OSNotificationOpenedResult *result) {
                  OSNotificationPayload* payload = result.notification.payload;
                  [self sendNotificationResponse:payload launchData:nil];
                }
+               // TODO: Make requesting permissions configurable
                settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification),
                           kOSSettingsKeyAutoPrompt : @NO}
     ];
@@ -58,6 +60,7 @@
   NSString *launchURL;
   NSDictionary *additionalData;
 
+  // TODO: Verify and test launchURL
   if (payload) {
     subtitle = payload.subtitle;
     launchURL = payload.launchURL;
