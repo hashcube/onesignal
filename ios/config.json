@@ -1,7 +1,7 @@
 {
   "code": [
-    "onesignalPlugin.h",
-    "onesignalPlugin.mm"
+    "OnesignalPlugin.h",
+    "OnesignalPlugin.mm"
   ],
   "frameworks": [
     "SystemConfiguration",
