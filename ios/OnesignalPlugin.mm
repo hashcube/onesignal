@@ -31,7 +31,7 @@
       [self sendNotificationResponse:nil launchData: apsData];
     }
 
-    // TODO: Since launchOptions is being passed, handleNotificationAction should be called, investigate?
+    // TODO: Since launchOptions is being passed, handleNotificationAction should be called, investigate
     [OneSignal initWithLaunchOptions:launchOptions
                appId:onesignalAppId
                handleNotificationReceived:^(OSNotification *notification) {
@@ -42,7 +42,8 @@
                  OSNotificationPayload* payload = result.notification.payload;
                  [self sendNotificationResponse:payload launchData:nil];
                }
-               settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification), kOSSettingsKeyAutoPrompt : @NO}
+               settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification),
+                          kOSSettingsKeyAutoPrompt : @NO}
     ];
     NSLog(@"{onesignal} initDone");
   }
@@ -54,8 +55,6 @@
 - (void) sendNotificationResponse: (OSNotificationPayload *)payload launchData:(NSDictionary *) data {
   NSMutableDictionary *notification_data;
   NSString * where;
-  NSError *error;
-  NSData *jsonData;
   NSString *jsonString;
   NSString *subtitle;
   NSString *launchURL;
@@ -93,22 +92,40 @@
       [notification_data setValue:launchURL forKey: @"launch_url"];
   }
   if(additionalData) {
-    [notification_data setValue:additionalData forKey: @"additional_data"];
+    jsonString = [self getJSONStringFromDict:additionalData];
+
+    if (jsonString) {
+      [notification_data setValue:jsonString forKey: @"additional_data"];
+    }
   }
-  jsonData = [NSJSONSerialization dataWithJSONObject:notification_data
-                                  options:NSJSONWritingPrettyPrinted
-                                  error:&error];
+
+  jsonString = [self getJSONStringFromDict:notification_data];
+
   [self showAlert:[NSString stringWithFormat:@"response: %@, %@", where, notification_data]];
 
-  if (! jsonData) {
-    NSLog(@"{gamethrive} Got a json error: %@", error);
-  } else {
-    jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-      [[PluginManager get] dispatchJSEvent:[NSDictionary dictionaryWithObjectsAndKeys:
+  if (jsonString) {
+    [[PluginManager get] dispatchJSEvent:[NSDictionary dictionaryWithObjectsAndKeys:
                                             @"onesignalNotificationOpened", @"name",
                                             jsonString, @"notification_data",
                                             NO, @"failed", nil]];
   }
+}
+
+- (NSString *) getJSONStringFromDict: (NSDictionary*) dict {
+    NSData *jsonData;
+    NSString *jsonString;
+    NSError *error;
+
+    jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                    options:NSJSONWritingPrettyPrinted
+                                    error:&error];
+    if (jsonData) {
+      jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    } else {
+      NSLog(@"{onesignal} Got a json error: %@", error);
+      jsonString = nil;
+    }
+    return jsonString;
 }
 
 - (void) showAlert: (NSString*) message {
@@ -129,7 +146,7 @@
 }
 
 - (void) didReceiveRemoteNotification:(NSDictionary *)userInfo application:(UIApplication *)app {
-  [self showAlert:[NSString stringWithFormat:@"didReceiveRemoteNotif%@", userInfo]];
+  //[self showAlert:[NSString stringWithFormat:@"didReceiveRemoteNotif%@", userInfo]];
 }
 
 - (void) sendUserTags:( NSDictionary *)tags {
