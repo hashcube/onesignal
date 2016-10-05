@@ -27,7 +27,6 @@
     NSDictionary *launchOptions = appDelegate.startOptions;
     NSDictionary *apsData = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (apsData) {
-      [self showAlert: @"launchdata present, wohooo!"];
       [self sendNotificationResponse:nil launchData: apsData];
     }
 
@@ -101,8 +100,6 @@
 
   jsonString = [self getJSONStringFromDict:notification_data];
 
-  [self showAlert:[NSString stringWithFormat:@"response: %@, %@", where, notification_data]];
-
   if (jsonString) {
     [[PluginManager get] dispatchJSEvent:[NSDictionary dictionaryWithObjectsAndKeys:
                                             @"onesignalNotificationOpened", @"name",
@@ -112,30 +109,20 @@
 }
 
 - (NSString *) getJSONStringFromDict: (NSDictionary*) dict {
-    NSData *jsonData;
-    NSString *jsonString;
-    NSError *error;
+  NSData *jsonData;
+  NSString *jsonString;
+  NSError *error;
 
-    jsonData = [NSJSONSerialization dataWithJSONObject:dict
-                                    options:NSJSONWritingPrettyPrinted
-                                    error:&error];
-    if (jsonData) {
-      jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    } else {
-      NSLog(@"{onesignal} Got a json error: %@", error);
-      jsonString = nil;
-    }
-    return jsonString;
-}
-
-- (void) showAlert: (NSString*) message {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug"
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+  jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                  options:NSJSONWritingPrettyPrinted
+                                  error:&error];
+  if (jsonData) {
+    jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  } else {
+    NSLog(@"{onesignal} Got a json error: %@", error);
+    jsonString = nil;
+  }
+  return jsonString;
 }
 
 - (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken application:(UIApplication *)app {
@@ -146,11 +133,9 @@
 }
 
 - (void) didReceiveRemoteNotification:(NSDictionary *)userInfo application:(UIApplication *)app {
-  //[self showAlert:[NSString stringWithFormat:@"didReceiveRemoteNotif%@", userInfo]];
 }
 
 - (void) sendUserTags:( NSDictionary *)tags {
-  [self showAlert:[NSString stringWithFormat:@"tags: %@", tags]];
   [OneSignal sendTags: tags];
   NSLog(@"tags: %@", tags);
 }
