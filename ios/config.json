@@ -10,10 +10,12 @@
   "additionalLinkerFlags": [
     "-ObjC"
   ],
-  "userDefined": [
-    "onesignalAppID"
-  ],
   "plist": {
-    "onesignalAppID": "$(onesignal.onesignalAppID)"
+    "UIBackgroundModes": [
+      "remote-notification"
+    ]
+  },
+  "entitlements": {
+    "aps-environment": "production"
   }
 }
