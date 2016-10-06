@@ -27,8 +27,17 @@
     NSString *onesignalAppId = [ios valueForKey:@"onesignalAppID"];
     NSDictionary *launchOptions = appDelegate.startOptions;
     NSDictionary *apsData = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    OSNotificationDisplayType notificationType;
+
     if (apsData) {
       [self sendNotificationResponse:nil launchData: apsData];
+    }
+
+    if([self isiOS10Plus]) {
+      notificationType = OSNotificationDisplayTypeNotification;
+    }
+    else {
+      notificationType = OSNotificationDisplayTypeNone;
     }
 
     // TODO: Since launchOptions is being passed, handleNotificationAction should be called, investigate
@@ -43,7 +52,7 @@
                  [self sendNotificationResponse:payload launchData:nil];
                }
                // TODO: Make requesting permissions configurable
-               settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification),
+               settings:@{kOSSettingsKeyInFocusDisplayOption : @(notificationType),
                           kOSSettingsKeyAutoPrompt : @NO}
     ];
     NSLog(@"{onesignal} initDone");
@@ -51,6 +60,10 @@
   @catch (NSException *exception) {
     NSLog(@"{onesignal} Failed to initialize with exception: %@", exception);
   }
+}
+
+- (BOOL)isiOS10Plus {
+  return [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0 ;
 }
 
 - (void) sendNotificationResponse: (OSNotificationPayload *)payload launchData:(NSDictionary *) data {
