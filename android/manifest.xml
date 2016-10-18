@@ -10,34 +10,11 @@
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 <uses-permission android:name="com.amazon.device.messaging.permission.RECEIVE" />
-<!-- START: ShortcutBadger -->
-<!-- Samsung -->
-<uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
-<uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
-
-<!-- HTC -->
-<uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
-<uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
-
-<!-- Sony -->
-<uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
-<uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
-
-<!-- Apex -->
-<uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
-
-<!-- Solid -->
-<uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
-
-<!-- Huawei -->
-<uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
-<uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
-<uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" />
-<!-- End: ShortcutBadger -->
--<uses-permission android:name="packageNamePermissionRECEIVE" />
+<uses-permission android:name="packageNamePermissionRECEIVE" />
 <!--END_PLUGINS_MANIFEST-->
 <!--START_PLUGINS_APPLICATION-->
 <!-- Onesignal -->
+<meta-data android:name="com.onesignal.BadgeCount" android:value="DISABLE" />
 <meta-data android:name="googleProjectNo" android:value="" />
 <meta-data android:name="onesignalAppID" android:value="" />
 <meta-data android:name="com.google.android.gms.version"
