@@ -17,4 +17,5 @@ Then add `onesignalAppID` to iOS or android section.
 "android": {
     "onesignalAppID": "xx-xx-xx-xx-xx"
 }
+
 ```
