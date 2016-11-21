@@ -198,7 +198,7 @@ public class OnesignalPlugin implements IPlugin {
       JSONObject additional_data;
 
       try {
-        os_data.put("notification_id", payload.notificationId);
+        os_data.put("notification_id", payload.notificationID);
         os_data.put("is_foreground", notification.isAppInFocus);
         os_data.put("title", payload.title);
         os_data.put("body", payload.body);
@@ -206,7 +206,7 @@ public class OnesignalPlugin implements IPlugin {
         if (additional_data != null) {
           os_data.put("additional_data", additional_data.toString());
         }
-        os_data.put("launch_url", payload.launchUrl);
+        os_data.put("launch_url", payload.launchURL);
       } catch (JSONException e) {
         e.printStackTrace();
       }
