@@ -22,6 +22,7 @@ import com.onesignal.OneSignal.*;
 import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationPayload;
 import com.onesignal.OSNotificationOpenResult;
+import com.onesignal.shortcutbadger.ShortcutBadger;
 
 public class OnesignalPlugin implements IPlugin {
 
@@ -68,6 +69,7 @@ public class OnesignalPlugin implements IPlugin {
           OneSignal.init(activity, g_Project_Number, appID, new OpenedHandler(), new ReceivedHandler());
           OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
           onesignal = true;
+          ShortcutBadger.applyCount(activity, 0);
           logger.log(TAG, "Onesignal instance created with version", OneSignal.VERSION);
         }
       }
