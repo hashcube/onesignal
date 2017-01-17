@@ -32,7 +32,7 @@
     if (apsData) {
       [self sendNotificationResponse:nil launchData: apsData];
     }
-
+      NSString *version = ONESIGNAL_VERSION;
     if([self isiOS10Plus]) {
       notificationType = OSNotificationDisplayTypeNotification;
     }
@@ -55,7 +55,7 @@
                settings:@{kOSSettingsKeyInFocusDisplayOption : @(notificationType),
                           kOSSettingsKeyAutoPrompt : @NO}
     ];
-    NSLog(@"{onesignal} initDone");
+    NSLog(@"{onesignal} initDone with version %@", version);
   }
   @catch (NSException *exception) {
     NSLog(@"{onesignal} Failed to initialize with exception: %@", exception);
