@@ -5,7 +5,7 @@
   ],
   "frameworks": [
     "SystemConfiguration",
-    "UserNotifications.framework",
+    "UserNotifications",
     "OneSignal.framework"
   ],
   "additionalLinkerFlags": [
