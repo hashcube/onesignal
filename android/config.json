@@ -6,7 +6,10 @@
   ],
   "jars": [
     "libs/OneSignalSDK-3.7.1.jar",
-    "libs/google-gcm.jar"
+    "libs/google-gcm.jar",
+    "libs/support-customtabs.jar",
+    "libs/support-v4.jar",
+    "libs/arch-libs.jar"
   ],
   "injectionXML": "manifest.xml",
   "injectionXSL": "manifest.xsl"
