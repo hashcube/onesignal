@@ -14,7 +14,9 @@
   "plist": {
     "UIBackgroundModes": [
       "remote-notification"
-    ]
+    ],
+    "NSLocationAlwaysUsageDescription": "This game uses the location to find out where you are",
+    "NSLocationWhenInUseUsageDescription": "This game uses the location to find out where you are"
   },
   "entitlements": {
     "aps-environment": "production"
