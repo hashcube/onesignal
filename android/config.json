@@ -6,8 +6,6 @@
   ],
   "jars": [
     "libs/support-customtabs.jar",
-    "libs/support-v4.jar",
-    "libs/arch-libs.jar",
     "libs/OneSignalSDK-3.9.1.jar",
     "libs/google-gcm.jar"
   ],
