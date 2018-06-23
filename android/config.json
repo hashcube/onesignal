@@ -10,8 +10,7 @@
     "file": "google-services.json",
     "path": "app"
     }
-  ]
-
+  ],
   "injectionXML": "manifest.xml",
   "injectionXSL": "manifest.xsl"
 }

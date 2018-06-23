@@ -1,5 +1,5 @@
 //<!--START_PLUGINS_DEPENDENCIES-->
-	//<!--GamePlay Dependencies-->
+	//<!--OneSignal Dependencies-->
     api 'com.google.android.gms:play-services-gcm:15.0.1'
     api 'com.onesignal.OneSignal:3.9.1'
     api 'com.android.support:customtabs:27.1.1'
