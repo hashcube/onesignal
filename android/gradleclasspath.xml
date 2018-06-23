@@ -1,5 +1,5 @@
 //<!--START_GOOGLE_PLAY_PLUGINS_CLASSPATH-->
 	//<!--Android Google Play for Devkit Onesignal Plugin-->
-    classpath 'com.google.gms:google-services:4.0.1'
+    classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.10.1, 0.99.99]'
 //<!--END_GOOGLE_PLAY_PLUGINS_CLASSPATH-->
 
