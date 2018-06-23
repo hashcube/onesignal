@@ -3,6 +3,7 @@
    "OnesignalPlugin.java"
   ],
   "injectionTealeafModuleGradleXML": "gradletealeaf.xml",
+  "injectionAppModuleGradleXML": "gradleapp.xml",
   "injectionAppModuleGradleAndroidPluginsGradleXML": "gradlepluginsapp.xml",
   "injectionGradleClasspathXML": "gradleclasspath.xml",
   "copyCustomFiles": [

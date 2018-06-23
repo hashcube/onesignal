@@ -1,0 +1,6 @@
+//<!--START_PLUGINS_DEPENDENCIES-->
+	//<!--OneSignal Dependencies-->
+    api 'com.google.android.gms:play-services-gcm:15.0.1'
+    api group: 'com.onesignal', name: 'OneSignal', version: '3.9.1'
+    api 'com.android.support:customtabs:27.1.1'
+//<!--END_PLUGINS_DEPENDENCIES-->
