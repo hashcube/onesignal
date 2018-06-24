@@ -1,4 +1,4 @@
-<!--START_MANIFEST_PLACEHOLDERS-->
+//<!--START_MANIFEST_PLACEHOLDERS-->
 <!-- Onesignal -->
  manifestPlaceholders = [
           onesignal_app_id: '{$onesignalAppID}',
@@ -6,4 +6,4 @@
           onesignal_google_project_number: 'REMOTE'
       ]
     }
-<!--END_MANIFEST_PLACEHOLDERS-->
+//<!--END_MANIFEST_PLACEHOLDERS-->
