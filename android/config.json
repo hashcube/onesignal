@@ -7,5 +7,6 @@
   "injectionGradleClasspathXML": "gradleclasspath.xml",
   "injectionManifestPlaceholdersGradleXML": "manifestplaceholdersgradle.xml",
   "injectionXML": "manifest.xml",
-  "injectionXSL": "manifest.xsl"
+  "injectionXSL": "manifest.xsl",
+  "injectionRepositoriesXML": "repositories.xml"
 }

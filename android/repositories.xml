@@ -1,0 +1,4 @@
+//<!--START_PLUGINS_REPOSITORIES-->
+	//<!--Onesignal Dependencies-->
+maven { url 'https://plugins.gradle.org/m2/'}
+//<!--END_PLUGINS_REPOSITORIES-->
