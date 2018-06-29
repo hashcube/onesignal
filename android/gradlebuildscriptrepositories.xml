@@ -1,0 +1,5 @@
+//<!--START_BUILDSCRIPT_REPOS-->
+	//<!--Onesignal-->
+    maven { url 'https://plugins.gradle.org/m2/'}
+//<!--END_BUILDSCRIPT_REPOS-->
+

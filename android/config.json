@@ -8,5 +8,7 @@
   "injectionManifestPlaceholdersGradleXML": "manifestplaceholdersgradle.xml",
   "injectionXML": "manifest.xml",
   "injectionXSL": "manifest.xsl",
-  "injectionRepositoriesXML": "repositories.xml"
+  "injectionRepositoriesXML": "repositories.xml",
+  "injectionBuildScriptRepositoriesXML": "gradlebuildscriptrepositories.xml",
+  "injectionGradleTealeafPatchXML": "gradletealeafpluginspatch.xml"
 }

@@ -1,0 +1,10 @@
+//<!--START_PLUGINS_PATCH-->
+	//<!--Path for Onesignal Android plugin to be compatible with Android Firebase plugin-->
+    plugins {
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+}
+//<!--END_PLUGINS_PATCH-->
+
+
+
+
