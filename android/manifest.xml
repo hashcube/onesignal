@@ -49,9 +49,10 @@
 <!--START_PLUGINS_APPLICATION-->
 <!-- Onesignal -->
 <meta-data android:name="com.onesignal.BadgeCount" android:value="DISABLE" />
-<!-- Seems not needed 
+
 <meta-data android:name="googleProjectNo" android:value="" />
 <meta-data android:name="onesignalAppID" android:value="" />
+<!--
 <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version" /> -->
 
