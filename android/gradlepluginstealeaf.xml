@@ -1,5 +1,0 @@
-//<!--START_ANDROID_PLUGINS-->
-	//<!--Android Google Play Plugin for Devkit Onesignal Plugin-->
-   apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
-//<!--END_ANDROID_PLUGINS-->
-

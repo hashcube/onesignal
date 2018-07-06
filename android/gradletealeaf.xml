@@ -2,3 +2,13 @@
 	//<!--OneSignal Dependencies-->
     implementation 'com.onesignal:OneSignal:[3.9.2, 3.99.99]'
 //<!--END_PLUGINS_DEPENDENCIES-->
+//<!--START_PLUGINS_PATCH-->
+	//<!--Path for Onesignal Android plugin to be compatible with Android Firebase plugin-->
+    plugins {
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+}
+//<!--END_PLUGINS_PATCH-->
+//<!--START_ANDROID_PLUGINS-->
+	//<!--Android Google Play Plugin for Devkit Onesignal Plugin-->
+   apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+//<!--END_ANDROID_PLUGINS-->

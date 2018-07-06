@@ -3,12 +3,8 @@
    "OnesignalPlugin.java"
   ],
   "injectionTealeafModuleGradleXML": "gradletealeaf.xml",
-  "injectionTealeafModuleGradleAndroidPluginsGradleXML": "gradlepluginstealeaf.xml",
+    "injectionTealeafModuleGradleXML": "gradleteapp.xml",
   "injectionGradleClasspathXML": "gradleclasspath.xml",
-  "injectionManifestPlaceholdersGradleXML": "manifestplaceholdersgradle.xml",
   "injectionXML": "manifest.xml",
-  "injectionXSL": "manifest.xsl",
-  "injectionRepositoriesXML": "repositories.xml",
-  "injectionBuildScriptRepositoriesXML": "gradlebuildscriptrepositories.xml",
-  "injectionGradleTealeafPatchXML": "gradletealeafpluginspatch.xml"
+  "injectionXSL": "manifest.xsl"
 }

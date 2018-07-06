@@ -2,3 +2,11 @@
 	//<!--OneSignal Dependencies-->
     implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
 //<!--END_PLUGINS_DEPENDENCIES-->
+//<!--START_MANIFEST_PLACEHOLDERS-->
+//<!-- OneSignal -->
+ manifestPlaceholders = [
+          onesignal_app_id: 'onesignalAppID',
+          // Project number pulled from dashboard, local value is ignored.
+          onesignal_google_project_number: 'REMOTE'
+      ]
+//<!--END_MANIFEST_PLACEHOLDERS-->

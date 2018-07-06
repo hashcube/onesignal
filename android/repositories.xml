@@ -1,4 +1,0 @@
-//<!--START_PLUGINS_REPOSITORIES-->
-	//<!--Onesignal Dependencies-->
-maven { url 'https://maven.google.com' }
-//<!--END_PLUGINS_REPOSITORIES-->
