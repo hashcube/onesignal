@@ -12,3 +12,11 @@
 	//<!--Android Google Play Plugin for Devkit Onesignal Plugin-->
    apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 //<!--END_ANDROID_PLUGINS-->
+//<!--START_MANIFEST_PLACEHOLDERS-->
+//<!-- OneSignal -->
+ manifestPlaceholders = [
+          onesignal_app_id: 'onesignalAppID',
+          // Project number pulled from dashboard, local value is ignored.
+          onesignal_google_project_number: 'REMOTE'
+      ]
+//<!--END_MANIFEST_PLACEHOLDERS-->
