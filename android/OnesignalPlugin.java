@@ -30,8 +30,6 @@ public class OnesignalPlugin implements IPlugin {
   private static final String TAG = "{{OnesignalPlugin}}";
   private static boolean onesignal = false;
 
-  private JSONObject tags_json;
-
   public class onesignalNotificationReceived extends com.tealeaf.event.Event {
     boolean failed;
     String notification_data;
