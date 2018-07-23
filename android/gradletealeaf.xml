@@ -1,0 +1,27 @@
+//<!--START_PLUGINS_DEPENDENCIES-->
+	//<!--OneSignal Dependencies-->
+    implementation 'com.onesignal:OneSignal:[3.9.2, 3.99.99]'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    //uncomment if analytics required
+    //implementation 'com.google.firebase:firebase-analytics:16.0.1'
+    api 'com.android.support:support-v4:27.1.1'
+    api 'com.android.support:customtabs:27.1.1'
+//<!--END_PLUGINS_DEPENDENCIES-->
+//<!--START_PLUGINS_PATCH-->
+	//<!--Path for Onesignal Android plugin to be compatible with Android Firebase plugin-->
+    plugins {
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+}
+//<!--END_PLUGINS_PATCH-->
+//<!--START_ANDROID_PLUGINS-->
+	//<!--Android Google Play Plugin for Devkit Onesignal Plugin-->
+   apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+//<!--END_ANDROID_PLUGINS-->
+//<!--START_MANIFEST_PLACEHOLDERS-->
+//<!-- OneSignal -->
+ manifestPlaceholders = [
+          onesignal_app_id: 'onesignalAppID',
+          // Project number pulled from dashboard, local value is ignored.
+          onesignal_google_project_number: 'REMOTE'
+      ]
+//<!--END_MANIFEST_PLACEHOLDERS-->
