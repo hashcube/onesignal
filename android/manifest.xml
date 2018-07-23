@@ -52,9 +52,6 @@
 
 <meta-data android:name="googleProjectNo" android:value="" />
 <meta-data android:name="onesignalAppID" android:value="" />
-<!--
-<meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" /> -->
 
 <amazon:enable-feature android:name="com.amazon.device.messaging" android:required="false"/>
 
