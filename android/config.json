@@ -2,15 +2,9 @@
   "copyFiles": [
    "OnesignalPlugin.java"
   ],
-  "libraries": [
-  ],
-  "jars": [
-    "libs/support-customtabs.jar",
-    "libs/support-v4.jar",
-    "libs/arch-libs.jar",
-    "libs/OneSignalSDK-3.9.2.jar",
-    "libs/google-gcm.jar"
-  ],
+  "injectionTealeafModuleGradleXML": "gradletealeaf.xml",
+  "injectionAppGradleXML": "gradleapp.xml",
+  "injectionGradleClasspathXML": "gradleclasspath.xml",
   "injectionXML": "manifest.xml",
   "injectionXSL": "manifest.xsl"
 }

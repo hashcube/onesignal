@@ -49,10 +49,9 @@
 <!--START_PLUGINS_APPLICATION-->
 <!-- Onesignal -->
 <meta-data android:name="com.onesignal.BadgeCount" android:value="DISABLE" />
+
 <meta-data android:name="googleProjectNo" android:value="" />
 <meta-data android:name="onesignalAppID" android:value="" />
-<meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
 
 <amazon:enable-feature android:name="com.amazon.device.messaging" android:required="false"/>
 
@@ -67,15 +66,6 @@
   </intent-filter>
 </receiver>
 
-<receiver android:name="com.onesignal.GcmBroadcastReceiver"
-          android:permission="com.google.android.c2dm.permission.SEND" >
-  <intent-filter>
-    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-      <category android:name="packageName" />
-  </intent-filter>
-</receiver>
-<receiver android:name="com.onesignal.NotificationOpenedReceiver" />
-
 <service android:name="com.onesignal.GcmIntentService" />
 <service android:name="com.onesignal.GcmIntentJobService"
          android:permission="android.permission.BIND_JOB_SERVICE" />
@@ -87,7 +77,7 @@
 <service android:name="com.onesignal.SyncJobService"
          android:permission="android.permission.BIND_JOB_SERVICE" />
 
-<activity android:name="com.onesignal.PermissionsActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+<activity tools:replace="android:theme" android:name="com.onesignal.PermissionsActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 <service android:name="com.onesignal.NotificationRestoreService" />
 <receiver android:name="com.onesignal.BootUpReceiver">
