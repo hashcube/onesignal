@@ -12,6 +12,8 @@
     }
   },
   "dependencies": {
-    "wrench": "^1.5.8"
+    "wrench": "^1.5.8",
+    "xmldoc": "^0.5.1",
+    "fs-extra": "^1.0.0"
   }
 }
