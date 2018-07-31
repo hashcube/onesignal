@@ -71,32 +71,3 @@ exports.onBeforeBuild = function (devkitAPI, app, config, cb) {
 
   cb();
 };
-
-/*exports.onCreateProject = function (api, app, config, cb) {
-
-
-  var filepathGradleTealeaf = path.join(__dirname, '../android', gradletealeaf.xml);
-
-  if (config.target == 'native-android') {
-    var onesignalAppID = app.manifest.android.onesignalAppID,
-      onesignalAppIDPlaceholder
-
-
-    var filepathGradleApp = path.join(__dirname, '../android', 'gradleapp.xml');
-    var writeGradleAppFile= fs.readFileAsync(filepathGradleApp, 'utf-8').then(function (gradleContents) {
-      gradleContents = string.replace('onesignalAppIDPlaceholder', onesignalAppID);
-      fs.writeFileAsync(filepathGradleA[p, gradleContents, 'utf-8')
-    })
-
-    var filepathGradleTealeaf = path.join(__dirname, '../android', 'gradletealeaf.xml');
-    var writeGradleTealeafFile= fs.readFileAsync(filepathGradleTealeaf, 'utf-8').then(function (gradleContents) {
-      gradleContents = string.replace('onesignalAppIDPlaceholder', onesignalAppID);
-      fs.writeFileAsync(filepathGradleTealeaf, gradleContents, 'utf-8')
-    })
-
-    return Promise.all([writeGradleAppFile,writeGradleTealeafFile])
-  }
-  else {
-    return Promise.resolve(true);
-  }
-}*/
