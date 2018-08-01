@@ -9,10 +9,6 @@
     <meta-data android:name="googleProjectNo" android:value="\ {$googleProjectNo}"/>
   </xsl:template>
 
-  <xsl:template match="meta-data[@android:name='onesignalAppID']">
-    <meta-data android:name="onesignalAppID" android:value="{$onesignalAppID}"/>
-  </xsl:template>
-
   <xsl:template match="permission[@android:name='c2d_message']">
     <permission android:protectionLevel="signature" android:name="{$packageName}.permission.C2D_MESSAGE"/>
   </xsl:template>

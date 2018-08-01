@@ -1,5 +1,8 @@
 /* jshint node: true */
 
+var path = require('path'),
+  fsExtra = Promise.promisifyAll(require('fs-extra'));
+
 var path = require("path"),
   fs = require("fs"),
   wrench = require('wrench'),
@@ -38,6 +41,22 @@ var path = require("path"),
 exports.onBeforeBuild = function (devkitAPI, app, config, cb) {
   'use strict';
 
+  if (config.target == 'native-android') {
+    var onesignalAppID = app.manifest.android.onesignalAppID,
+    filepathGradleApp = path.join(__dirname, '../android', 'gradleapp.xml'),
+    filepathGradleTealeaf = path.join(__dirname, '../android', 'gradletealeaf.xml');
+
+    fsExtra.readFileAsync(filepathGradleApp, 'utf-8').then(function (gradleContents) {
+      gradleContents = gradleContents.replace('onesignalAppIDPlaceholder', onesignalAppID);
+      fsExtra.writeFileAsync(filepathGradleApp, gradleContents, 'utf-8');
+    })
+
+
+    fsExtra.readFileAsync(filepathGradleTealeaf, 'utf-8').then(function (gradleContents) {
+      gradleContents = gradleContents.replace('onesignalAppIDPlaceholder', onesignalAppID);
+      fsExtra.writeFileAsync(filepathGradleTealeaf, gradleContents, 'utf-8');
+    })
+  }
   var out_path = config.outputPath;
 
   if (config.target === 'native-android') {
