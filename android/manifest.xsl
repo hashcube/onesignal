@@ -6,7 +6,7 @@
   <xsl:param name="onesignalAppID"></xsl:param>
 
   <xsl:template match="meta-data[@android:name='googleProjectNo']">
-    <meta-data android:name="googleProjectNo" android:value="\ {$googleProjectNo}"/>
+    <meta-data android:name="googleProjectNo" android:value="{$googleProjectNo}"/>
   </xsl:template>
 
   <xsl:template match="permission[@android:name='c2d_message']">
