@@ -58,23 +58,17 @@ public class OnesignalPlugin implements IPlugin {
 
     try {
       if (onesignal == false) {
-        Bundle meta = manager.getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA).metaData;
-
-        if (meta != null) {
-          g_Project_Number = meta.get("googleProjectNo").toString();
-          appID = meta.get("onesignalAppID").toString();
-        }
-
-        if (appID != null && g_Project_Number != null) {
-          OneSignal.init(activity, g_Project_Number, appID, new OpenedHandler(), new ReceivedHandler());
-          OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
-          onesignal = true;
-          ShortcutBadger.applyCount(activity, 0);
-          logger.log(TAG, "Onesignal instance created with version", OneSignal.VERSION);
-        }
+        OneSignal.startInit(activity)
+          .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+          .unsubscribeWhenNotificationsAreDisabled(true)
+          .init();
+        ShortcutBadger.applyCount(activity, 0);
+        onesignal = true;
+        logger.log(TAG, "Onesignal instance created with version", OneSignal.VERSION);
       }
     }
     catch (Exception e) {
+      logger.log(TAG, "Onesignal initialization failing", OneSignal.VERSION);
       e.printStackTrace();
     }
   }
