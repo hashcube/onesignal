@@ -38,7 +38,7 @@ var path = require("path"),
     }
   };
 
-  exports.onBeforeBuild = function (devkitAPI, app, config, cb) {
+  exports.onCreateProject = function (devkitAPI, app, config, cb) {
   'use strict';
 
   var out_path = config.outputPath;
