@@ -6,5 +6,7 @@
   "injectionAppGradleXML": "gradleapp.xml",
   "injectionGradleClasspathXML": "gradleclasspath.xml",
   "injectionXML": "manifest.xml",
-  "injectionXSL": "manifest.xsl"
+  "injectionXSL": "manifest.xsl",
+  "transformGradleApp": "gradleapp.json",
+  "transformGradleTealeaf": "gradletealeaf.json"
 }
