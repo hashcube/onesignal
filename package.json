@@ -1,6 +1,6 @@
 {
   "name": "onesignal",
-  "version": "2.3.1",
+  "version": "2.3.3",
   "devkit": {
     "clientPaths": {
       "onesignal": "js"
