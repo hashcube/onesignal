@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.AsyncTask;
 
 import android.content.pm.PackageManager;
 import android.content.pm.ApplicationInfo;
@@ -103,13 +104,17 @@ public class OnesignalPlugin implements IPlugin {
   }
 
   //Send tags to onesignal
-  public void sendTags(JSONObject jsonData) {
-    try {
-      logger.log(TAG, "Send Tags : " , jsonData.toString());
-      OneSignal.sendTags(jsonData);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  public void sendTags(final JSONObject jsonData) {
+    AsyncTask.execute(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          OneSignal.sendTags(jsonData);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
   }
 
   //Get notification_received_count, Other tags can be gotten in the same way
