@@ -10,7 +10,6 @@ var path = require("path"),
     'use strict';
 
     var dest_path = path.join(outputPath,
-        "../..",
         app.manifest.shortName,
         "tealeaf/src/main",
         "res/drawable-" + tag +
