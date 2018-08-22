@@ -59,6 +59,8 @@ public class OnesignalPlugin implements IPlugin {
     try {
       if (onesignal == false) {
         OneSignal.startInit(activity)
+          .setNotificationReceivedHandler(new ReceivedHandler())
+          .setNotificationOpenedHandler(new OpenedHandler())
           .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
           .unsubscribeWhenNotificationsAreDisabled(true)
           .init();
