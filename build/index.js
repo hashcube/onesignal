@@ -1,12 +1,18 @@
 /* jshint node: true */
 
+var path = require('path'),
+  fsExtra = Promise.promisifyAll(require('fs-extra'));
+
 var path = require("path"),
   fs = require("fs"),
   wrench = require('wrench'),
   copyNotifyIcon = function (app, outputPath, tag, name, large) {
     'use strict';
 
-    var dest_path = path.join(outputPath, "res/drawable-" + tag +
+    var dest_path = path.join(outputPath,
+        app.manifest.shortName,
+        "tealeaf/src/main",
+        "res/drawable-" + tag +
         "dpi/"),
       android = app.manifest.android,
       icons = android && android.icons,
@@ -31,7 +37,7 @@ var path = require("path"),
     }
   };
 
-exports.onBeforeBuild = function (devkitAPI, app, config, cb) {
+  exports.onCreateProject = function (devkitAPI, app, config, cb) {
   'use strict';
 
   var out_path = config.outputPath;

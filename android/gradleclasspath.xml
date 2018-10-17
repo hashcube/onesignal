@@ -1,0 +1,14 @@
+//<!--START_GOOGLE_PLAY_PLUGINS_CLASSPATH-->
+	//<!--Android Google Play for Devkit Onesignal Plugin-->
+    classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.10.1, 0.99.99]'
+//<!--END_GOOGLE_PLAY_PLUGINS_CLASSPATH-->
+//<!--START_BUILDSCRIPT_REPOS-->
+	//<!--Onesignal-->
+    maven { url 'https://plugins.gradle.org/m2/'}
+//<!--END_BUILDSCRIPT_REPOS-->
+//<!--START_PLUGINS_REPOSITORIES-->
+	//<!--Onesignal Dependencies-->
+maven { url 'https://maven.google.com' }
+//<!--END_PLUGINS_REPOSITORIES-->
+
+
